@@ -29,7 +29,7 @@ public class ApproximatePriority {
 
     public void recycle(double element, int element_lens) {
         int index = (int) (element % HASH_VALUE);
-        if (table[index].ispriority == true) {
+        if (table[index].ispriority) {
             if (galaxy.find(element) == null) {
                 galaxy = galaxy.colony(element, PRUNE);
                 try {
@@ -55,7 +55,7 @@ public class ApproximatePriority {
         for (j = 0; j < pri_elements; j++) {
             max = index = 0;
             for (i = 0; i < HASH_VALUE; i++) {
-                if (table[i] == null || table[i].ispriority == true)
+                if (table[i] == null || table[i].ispriority)
                     continue;
                 if (table[i].points > max) {
                     max = table[i].points;
@@ -132,7 +132,7 @@ public class ApproximatePriority {
             if (yp == 3) { // means it is was 7 before (a complete byte)
                 k = dec = 0;
                 for (j = 7; j >= 0; j--) {
-                    dec += (y[j] == false ? 0 : 1) * Math.pow(2, k++);
+                    dec += (!y[j] ? 0 : 1) * Math.pow(2, k++);
                 }
                 dec = (dec <= 127) ? dec : dec - 256;
                 x[xp++] = (byte) dec;
@@ -148,7 +148,7 @@ public class ApproximatePriority {
             }
             k = dec = 0;
             for (j = 7; j >= 0; j--) {
-                dec += (y[j] == false ? 0 : 1) * Math.pow(2, k++);
+                dec += (!y[j] ? 0 : 1) * Math.pow(2, k++);
             }
             dec = (dec <= 127) ? dec : dec - 256;
             x[xp++] = (byte) dec;
@@ -189,7 +189,7 @@ public class ApproximatePriority {
         return header_size;
     }// end of getHeaderSize()
 
-    private class Node // 5.08 bytes
+    private static class Node // 5.08 bytes
     {
         int points = 0;
         boolean ispriority = false;

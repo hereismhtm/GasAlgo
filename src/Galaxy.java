@@ -198,7 +198,7 @@ public class Galaxy {
         }
     }
 
-    public class Planet // 14 bytes
+    public static class Planet // 14 bytes
     {
         double life;
         int power = 1;
